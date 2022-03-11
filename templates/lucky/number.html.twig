@@ -1,0 +1,19 @@
+{% extends 'layouts/main12.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>{{ page_title }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        Fatima\'s lucky number: {{ num }}
+    </div>
+    <div class="col-md-6">
+        {{ include('lucky/block.html.twig', {title_block: page_title}) }}
+    </div> 
+</div>    
+{% endblock body %}

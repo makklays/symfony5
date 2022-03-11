@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome to project!{% endblock %}</title>
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+
+        <link rel="shortcut icon" href="{{ absolute_url('favicon.png') }}">
+    </head>
+    <body>
+        
+        {% block body %}{% endblock %}
+
+    </body>
+</html>
