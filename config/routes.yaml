@@ -2,6 +2,7 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+# Lucky
 lucky:
   path: /lucky/
   controller: App\Controller\LuckyController::index
@@ -14,8 +15,24 @@ app_lucky_frase:
   path: /lucky/frase/
   controller: App\Controller\LuckyController::randomFrase
 
+# Login
 login:
   path: /login/
   controller: App\Controller\AuthController::login
 
-  
+# API
+api_post_index:
+    path:       /api/v1.2/posts
+    controller: App\Controller\Api\BlogController::index
+    methods:    GET
+    
+api_post_show:
+    path:       /api/v1.2/posts/{id}
+    controller: App\Controller\Api\BlogController::show
+    methods:    GET|HEAD
+
+api_post_edit:
+    path:       /api/v1.2/posts/{id}
+    controller: App\Controller\Api\BlogController::edit
+    methods:    PUT
+
