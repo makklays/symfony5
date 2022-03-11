@@ -2,7 +2,20 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+lucky:
+  path: /lucky/
+  controller: App\Controller\LuckyController::index
+
 app_lucky_number:
   path: /lucky/number/
   controller: App\Controller\LuckyController::randomNumber
 
+app_lucky_frase:
+  path: /lucky/frase/
+  controller: App\Controller\LuckyController::randomFrase
+
+login:
+  path: /login/
+  controller: App\Controller\AuthController::login
+
+  
