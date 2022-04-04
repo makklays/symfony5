@@ -39,22 +39,22 @@ api_post_edit:
 # Animals
 animals_index:
   path: /animals
-  controller: App\Controller\AnimalController::index
+  controller: App\Controller\AnimalsController::index
   methods: GET
 
 animals_add:
   path: /animals/add
-  controller: App\Controller\AnimalController::add
+  controller: App\Controller\AnimalsController::add
   methods: POST|GET 
 
 animals_edit:
   path: /animals/edit/{id}
-  controller: App\Controller\AnimalController::edit
+  controller: App\Controller\AnimalsController::edit
   methods: POST|GET 
 
 animals_delete:
   path: /animals/delete/{id}
-  controller: App\Controller\AnimalController::delete
+  controller: App\Controller\AnimalsController::delete
   methods: POST|GET 
 
 # 
