@@ -1,0 +1,47 @@
+{% extends 'layouts/main12.html.twig' %}
+
+{% block title %}Hello Animals!{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">Pagina principle</i>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <h1>Hello {{ controller_name }}! ✅</h1>
+
+            This friendly message is coming from:
+            <ul>
+                <li>Your controller at <code><a href="{{ '/home/alexander/www/symfony5/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
+                <li>Your template at <code><a href="{{ '/home/alexander/www/symfony5/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
+            </ul>
+
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="{{ path('animals_index') }}">Animales</a></li>
+                <li><a href="{{ path('lucky') }}">Lucky</a></li>
+                <li><a href="{{ path('api_post_index') }}">API Posts</a></li>
+                <li><a href="{{ path('products_index') }}">Products</a></li>
+            </ul>
+
+        </div>
+        <div class="col-md-4">
+            
+            {% include 'layouts/menu.html.twig' %}
+            
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
