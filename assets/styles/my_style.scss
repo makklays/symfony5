@@ -1,0 +1,25 @@
+
+body {
+    /*background-color: aqua;*/
+}
+
+.container {
+    /*background-color: #FFFFFF;*/
+    max-height: 100%;
+}
+
+.my-menu {
+    border: 1px solid grey;
+    background-color: #e7e7e7;
+    border-radius: 5px;
+
+    ul {
+        /*margin-top: 1rem;*/
+    }
+
+    ul > li {
+        list-style: none;
+        text-decoration: underline;
+    }
+}
+
