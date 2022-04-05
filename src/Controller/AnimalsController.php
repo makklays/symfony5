@@ -22,6 +22,17 @@ class AnimalsController extends AbstractController
         ]);
     }
 
+    public function show(Request $request, $id) 
+    {
+        $animal = $this->getDoctrine()
+                    ->getRepository(Animals::class)
+                    ->find($id);
+
+        return $this->render('animals/show.html.twig', [
+            'animal' => $animal,
+        ]);                  
+    } 
+
     public function add(Request $request)
     {
         /*$animal = new Animals();

@@ -1,0 +1,54 @@
+{% extends 'layouts/main12.html.twig' %}
+
+{% block title %}Hello Animals!{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('index') }}">Pagina principle</a></i>
+                    <li class="breadcrumb-item"><a href="{{ path('animals_index') }}">Animales</a></i>
+                    <li class="breadcrumb-item active">Animale - {{ animal.name }}</i>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <h1>{{ animal.name }}</h1>
+
+            <div><b>ID:</b> {{ animal.id }}</div> <br/>
+
+            <div><b>Type:</b> {{ animal.getTypeId() }}</div> <br/>
+            
+            <div class="descr">
+                <b>Description:</b> <br/>
+                {{ animal.description }} 
+            </div> <br/>
+            
+            <div>
+                <b>Image:</b> <br/>
+                {{ animal.img }}
+            </div> <br/>
+
+            <div><b>Is Active:</b> {{ animal.getIsActive() }}</div> <br/>
+
+            <div>
+                <a href="{{ path('animals_index') }}" class="btn btn-dark"><< Back</a> 
+                <a href="{{ path('animals_edit', {id: animal.id}) }}" class="btn btn-success">Editar</a> 
+            </div>
+            
+        </div>
+        <div class="col-md-4">
+            {% include 'layouts/menu.html.twig' %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
