@@ -1,6 +1,6 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+  path: /
+  controller: App\Controller\MainController::index
 
 # Lucky
 lucky:
@@ -36,10 +36,20 @@ api_post_edit:
   controller: App\Controller\Api\BlogController::edit
   methods:    PUT
 
+# Products
+products_index:
+  path: /products/
+  controller: App\Controller\ProductController::index  
+
 # Animals
 animals_index:
   path: /animals
   controller: App\Controller\AnimalsController::index
+  methods: GET
+
+animals_show:
+  path: /animals/show/{id}
+  controller: App\Controller\AnimalsController::show
   methods: GET
 
 animals_add:

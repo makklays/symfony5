@@ -1,0 +1,70 @@
+{% extends 'layouts/main12.html.twig' %}
+
+{% block title %}Hello Animals!{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('index') }}">Pagina principle</a></i>
+                    <li class="breadcrumb-item active">Animales</i>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>Animales! ✅</h1>
+                </div>    
+                <div class="col-md-4">
+                    <div style="text-align:right;">
+                        <a href="{{ path('animals_add') }}" class="btn btn-success">Añade</a> 
+                    </div>
+                </div>
+            </div>
+
+            {% if animals %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col" class="text-center">#</th>
+                        <th scope="col" class="text-center">First</th>
+                        <th scope="col" class="text-center">Type ID</th>
+                        <th scope="col" class="text-center">Is active</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for item in animals %}
+                            <tr>
+                                <th class="text-center" scope="row">{{ item.id }}</th>
+                                <td class="text-center"><a href="{{ path('animals_show', {id: item.id}) }}" title="{{ item.name }}" >{{ item.name }}</a> </td>
+                                <td class="text-center">{{ item.getTypeId() }}</td>
+                                <td class="text-center">{{ item.getIsActive() }}</td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            {% else %}
+                <i>Don't have animals</i>
+            {% endif %}
+
+        </div>
+        <div class="col-md-4">
+            
+            {% include 'layouts/menu.html.twig' %}
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
