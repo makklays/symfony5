@@ -1,3 +1,33 @@
-<div>
-    <h3>{{ title_block }}</h3>
-<div>
+{% extends 'layouts/main12.html.twig' %}
+
+{% block title %}Hello Animales!{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('index') }}">Página principl</a></i>
+                    <li class="breadcrumb-item active">Block</i>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <div>
+                <h3>{{ title_block }}</h3>
+            <div>
+
+        </div>
+
+        <div class="col-md-4">
+            {% include 'layouts/menu.html.twig' %}
+        </div>
+    </div>
+
+</div>
