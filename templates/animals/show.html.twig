@@ -1,6 +1,6 @@
 {% extends 'layouts/main12.html.twig' %}
 
-{% block title %}Hello Animals!{% endblock %}
+{% block title %}Hello Animales!{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -11,7 +11,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ path('index') }}">Pagina principle</a></i>
                     <li class="breadcrumb-item"><a href="{{ path('animals_index') }}">Animales</a></i>
-                    <li class="breadcrumb-item active">Animale - {{ animal.name }}</i>
+                    <li class="breadcrumb-item active">Animal - {{ animal.name }}</i>
                 </ol>
             </nav>
         </div>
@@ -24,19 +24,35 @@
 
             <div><b>ID:</b> {{ animal.id }}</div> <br/>
 
-            <div><b>Type:</b> {{ animal.getTypeId() }}</div> <br/>
+            <div><b>Type:</b> 
+                {% if animal.getTypeId() == 1 %}
+                    Gato
+                {% elseif animal.getTypeId() == 2 %}
+                    Perro
+                {% elseif animal.getTypeId() == 3 %}
+                    Tortoise
+                {% else %}
+                    Otro
+                {% endif %}
+            </div> <br/>
             
             <div class="descr">
                 <b>Description:</b> <br/>
-                {{ animal.description }} 
+                {{ animal.description | nl2br }} 
             </div> <br/>
             
             <div>
                 <b>Image:</b> <br/>
-                {{ animal.img }}
+                <img src="{{ asset('uploads/imgs/' ~ animal.img) }}" style="widht:300px;" alt="img" />
             </div> <br/>
 
-            <div><b>Is Active:</b> {{ animal.getIsActive() }}</div> <br/>
+            <div><b>Is Active:</b> 
+                {% if animal.getIsActive() == 1 %}
+                    <span class="badge badge-success">sí</span>
+                {% else %} 
+                    <span class="badge badge-danger">no</span>   
+                {% endif %}
+            </div> <br/>
 
             <div>
                 <a href="{{ path('animals_index') }}" class="btn btn-dark"><< Back</a> 

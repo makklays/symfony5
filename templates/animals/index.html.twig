@@ -1,6 +1,6 @@
 {% extends 'layouts/main12.html.twig' %}
 
-{% block title %}Hello Animals!{% endblock %}
+{% block title %}Hello Animales!{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -25,7 +25,7 @@
                 </div>    
                 <div class="col-md-4">
                     <div style="text-align:right;">
-                        <a href="{{ path('animals_add') }}" class="btn btn-success">Añade</a> 
+                        <a href="{{ path('animals_add') }}" class="btn btn-success">Añadir</a> 
                     </div>
                 </div>
             </div>
@@ -34,10 +34,12 @@
                 <table class="table">
                     <thead>
                         <tr>
-                        <th scope="col" class="text-center">#</th>
-                        <th scope="col" class="text-center">First</th>
-                        <th scope="col" class="text-center">Type ID</th>
+                        <th scope="col" class="text-center">#ID</th>
+                        <th scope="col" class="text-center">Name</th>
+                        <th scope="col" class="text-center">Tipo de animal</th>
+                        <th scope="col" class="text-center">Imagen</th>
                         <th scope="col" class="text-center">Is active</th>
+                        <th scope="col" class="text-center" style="width:170px;">Acciónes</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,8 +48,36 @@
                             <tr>
                                 <th class="text-center" scope="row">{{ item.id }}</th>
                                 <td class="text-center"><a href="{{ path('animals_show', {id: item.id}) }}" title="{{ item.name }}" >{{ item.name }}</a> </td>
-                                <td class="text-center">{{ item.getTypeId() }}</td>
-                                <td class="text-center">{{ item.getIsActive() }}</td>
+                                <td class="text-center">
+                                    {% if item.getTypeId() == 1 %}
+                                        Gato
+                                    {% elseif item.getTypeId() == 2 %}
+                                        Perro
+                                    {% elseif item.getTypeId() == 3 %}
+                                        Tortoise
+                                    {% else %}
+                                        Otro
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {% if item.img != null %}
+                                        <span class="badge badge-success">sí</span>
+                                    {% else %} 
+                                        <span class="badge badge-danger">no</span>   
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {% if item.getIsActive() == 1 %}
+                                        <span class="badge badge-success">sí</span>
+                                    {% else %} 
+                                        <span class="badge badge-danger">no</span>   
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    <i class="fa fa-list"></i> <a href="{{ path('animals_show', {id: item.id}) }}" title="Mirar" >mirar</a> | 
+                                    <i class="fa fa-edit"></i> <a href="{{ path('animals_edit', {id: item.id}) }}" title="Editar" >editar</a> | 
+                                    <i class="fa fa-bucket"></i> <a href="{{ path('animals_delete', {id: item.id}) }}" title="Borrar" onclick="return confirm('Quieres borrar este ID={{ item.id }} ?');" >borrar</a> 
+                                </td>
                             </tr>
                         {% endfor %}
 
