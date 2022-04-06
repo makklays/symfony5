@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Animals;
 use App\Form\AnimalsType;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AnimalsController extends AbstractController
 {
@@ -33,7 +36,7 @@ class AnimalsController extends AbstractController
         ]);                  
     } 
 
-    public function add(Request $request)
+    public function add(Request $request, SluggerInterface $slugger)
     {
         /*$animal = new Animals();
         $animal->setName('Gato');
@@ -45,12 +48,31 @@ class AnimalsController extends AbstractController
         $animal = new Animals();
         
         $form = $this->createForm(AnimalsType::class, $animal);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
             $animal = $form->getData();
+
+            $img = $form->get('img')->getData();
+            if ($img) {
+                $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$img->guessExtension();
+                
+                // save file to store
+                try {
+                    $img->move(
+                        $this->getParameter('img_directory'),
+                        $newFilename
+                    );
+                    $animal->setImg($newFilename);
+
+                } catch (FileException $e) {
+                    //
+                    echo 'Exception! Message: '.$e->getMessage().' File:'.$e->getFile().' Line:'.$e->getLine();
+                    exit;
+                }
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($animal);
@@ -70,16 +92,61 @@ class AnimalsController extends AbstractController
         ]);
     }
 
-    public function edit(Request $request, $id)
+    public function edit(Request $request, $id, SluggerInterface $slugger)
     {
+        $animal = $this->getDoctrine()->getRepository(Animals::class)->find($id);
+
+        $form = $this->createForm(AnimalsType::class, $animal);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $animal = $form->getData();
+
+            $img = $form->get('img')->getData();
+            if ($img) {
+                $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$img->guessExtension();
+
+                // save file to store
+                try {
+                    $img->move(
+                        $this->getParameter('img_directory'),
+                        $newFilename
+                    );
+                    $animal->setImg($newFilename);
+
+                } catch (FileException $e) {
+                    //
+                    echo 'Exception! Message: '.$e->getMessage().' File:'.$e->getFile().' Line:'.$e->getLine();
+                    exit;
+                }
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($animal);
+            $em->flush();
+
+            return $this->redirectToRoute('animals_index');
+        }
+
         return $this->render('animals/edit.html.twig', [
             'id' => $id,
+            'form' => $form->createView(),
         ]);
     }
 
     public function delete(Request $request, $id)
     {
-        return $this->redirect()->path('animals_index');
+        $animal = $this->getDoctrine()->getRepository(Animals::class)->find($id);
+
+        if (is_object($animal)) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($animal);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('animals_index');
     }
 }
 

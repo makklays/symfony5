@@ -25,6 +25,7 @@ class AnimalsType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'required' => true,
+                'label' => 'Nombre',
             ])
             ->add('type_id', ChoiceType::class, [
                 'choices' => [
@@ -33,19 +34,36 @@ class AnimalsType extends AbstractType
                     '3. Tortoises' => 3,
                 ],
                 'required' => true,
+                'label' => 'Tipo de aniaml',
                 'placeholder' => 'Eleji tipo de animales',
                 'attr' => ['class' => 'form-control'],
             ])
             ->add('description', TextareaType::class, [
-                'attr' => ['class' => 'tinymce textarea-big']
+                'attr' => ['class' => 'tinymce textarea-big'],
+                'label' => 'Descripción',
             ])
             ->add('img', FileType::class, [
                 'required' => false,
                 'attr' => ['class' => 'form-control'],
+                'label' => 'Imagen',
+                'mapped' => false,
+                /*'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeType' => [
+                            'application/image',
+                        ],
+                        'mimeTypeMessage' => 'Por favor, cargar Imagine valido',
+                    ]),
+                ],*/
             ])
-            ->add('is_active', CheckboxType::class)
+            ->add('is_active', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Activo',
+            ])
             ->add('save', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-success'],
+                'label' => 'Guardar',
             ])
         ;
     }
