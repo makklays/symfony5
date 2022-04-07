@@ -1,0 +1,100 @@
+{% extends 'layouts/main12.html.twig' %}
+
+{% block title %}Lista de pacientes!{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('index') }}">Página principle</a></i>
+                    <li class="breadcrumb-item active">Pacientes</i>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>Pacientes</h1>
+                </div>    
+                <div class="col-md-4">
+                    <div style="text-align:right;">
+                        <a href="{{ path('paciente_add') }}" class="btn btn-success">Añadir nueva paciente</a> 
+                    </div>
+                </div>
+            </div>
+
+            {# read and display all message #}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            {% if pacientes %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col" class="text-center">#ID</th>
+                        <th scope="col" class="text-center">Fullname</th>
+                        <th scope="col" class="text-center">Movil</th>
+                        <th scope="col" class="text-center">Foto</th>
+                        <th scope="col" class="text-center">DoctorID</th>
+                        <th scope="col" class="text-center" style="width:170px;">Acciónes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for item in pacientes %}
+                            <tr>
+                                <th class="text-center" scope="row">{{ item.id }}</th>
+                                <td class="text-center"><a href="{{ path('paciente_show', {'id': item.id}) }}" title="{{ item.firstname }}" >{{ item.firstname }} {{ item.lastname }}</a> </td>
+                                <td class="text-center">
+                                    {% if item.mobile != null %}
+                                        {{ item.mobile }}
+                                    {% else %}
+                                        no tiene
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {% if item.foto != null %}
+                                        <span class="badge badge-success">sí</span>
+                                    {% else %} 
+                                        <span class="badge badge-danger">no</span>   
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">{{ item.getDoctorId() }}</td>
+                                <td class="text-center">
+                                    <i class="fa fa-list"></i> <a href="{{ path('paciente_show', {id: item.id}) }}" title="Mirar" >mirar</a> | 
+                                    <i class="fa fa-edit"></i> <a href="{{ path('paciente_edit', {id: item.id}) }}" title="Editar" >editar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            {% else %}
+                <i>No tiene ningunas pacientes</i>
+            {% endif %}
+
+        </div>
+        <div class="col-md-3">
+            
+            {% include 'layouts/menu.html.twig' %}
+
+            {% include 'paciente/banner.html.twig' %}
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+

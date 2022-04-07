@@ -13,4 +13,9 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
         ]);
     }
+
+    public function info()
+    {
+        return $this->render('main/info.html.twig');
+    }
 }

@@ -2,6 +2,10 @@ index:
   path: /
   controller: App\Controller\MainController::index
 
+info:
+  path: /muy-importante-info
+  controller: App\Controller\MainController::info
+
 # Lucky
 lucky:
   path: /lucky/
@@ -67,5 +71,24 @@ animals_delete:
   controller: App\Controller\AnimalsController::delete
   methods: POST|GET 
 
-# 
+# Paciente
+paciente_index:
+  path: /pacientes
+  controller: App\Controller\PacienteController::index
+  methods: GET
+
+paciente_add:
+  path: /pacientes/add
+  controller: App\Controller\PacienteController::add
+  methods: POST|GET
+  
+paciente_show:
+  path: /pacientes/show/{id}
+  controller: App\Controller\PacienteController::show
+  methods: POST|GET
+
+paciente_edit:
+  path: /pacientes/edit/{id}
+  controller: App\Controller\PacienteController::edit
+  methods: POST|GET
 

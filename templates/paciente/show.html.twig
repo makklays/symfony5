@@ -1,0 +1,92 @@
+{% extends 'layouts/main12.html.twig' %}
+
+{% block title %}Pacientes!{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('index') }}">Página principle</a></i>
+                    <li class="breadcrumb-item"><a href="{{ path('paciente_index') }}">Pacientes</a></i>
+                    <li class="breadcrumb-item active">Los datos de paciente - {{ paciente.firstname }} {{ paciente.lastname }}</i>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9">
+
+            {% if paciente.firstname != null %}
+                <h1>{{ paciente.firstname }} {{ paciente.lastname }}</h1>
+            {% else %}
+                <h1>Los datos de paciente</h1>
+            {% endif %}    
+
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    {% if paciente.foto != null %}
+                        <img src="{{ asset('uploads/pacientes/fotos/' ~ paciente.foto) }}" style="width:100%;" class="img-fluid">
+                    {% else %}
+                        <img src="{{ asset('images/empty.jpg') }}" style="width:100%;" class="img-fluid">
+                    {% endif %}    
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        <b>Firstname:</b> {{ paciente.firstname }}
+                    </p>
+                    
+                    <p>
+                        <b>Lastname:</b> {{ paciente.lastname }}
+                    </p>
+                    
+                    <p>
+                        <b>Nacer:</b> {{ paciente.id | format('d/m/Y') }}
+                    </p>
+                    
+                    <p>
+                        <b>Movíle:</b> {{ paciente.mobile }}
+                    </p>
+                    
+                    <p>
+                        <b>Corréo:</b> {{ paciente.email }}
+                    </p>
+                    
+                    <p>
+                        <b>NIE:</b> {{ paciente.pud }}
+                    </p>
+                    
+                    <p>
+                        <b>Doctor ID: </b> {{ paciente.getDoctorId() }}
+                    </p>    
+
+                    <p>
+                        <b>Dirección:</b> {{ paciente.address }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" style="margin-top: 18px;">
+                    <a href="{{ path('paciente_index') }}" class="btn btn-dark"><< Cancelar</a> 
+                </div>
+            </div>
+
+            <br/><br/><br/>
+
+        </div>
+        <div class="col-md-3">
+            
+            {% include 'layouts/menu.html.twig' %}
+
+            {% include 'paciente/banner.html.twig' %}
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
