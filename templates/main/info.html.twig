@@ -1,0 +1,48 @@
+{% extends 'layouts/main12.html.twig' %}
+
+{% block title %}Info!{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('index') }}">Página principle</a></i>
+                    <li class="breadcrumb-item active">Muy importante información</i>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9">
+
+        <h1>Muy importante infarmaciñón</h1>
+
+        <p>
+            texto texto texto texto texto texto texto texto texto texto texto texto 
+            texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
+            texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
+            texto texto texto texto texto texto texto texto texto texto texto texto 
+        </p>
+        <p>
+            texto texto texto texto texto texto texto texto texto texto texto texto texto 
+            texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
+            texto texto texto texto texto texto texto texto texto texto texto 
+        </p>
+
+        </div>
+        <div class="col-md-3">
+            
+            {% include 'layouts/menu.html.twig' %}
+            
+            {% include 'paciente/banner.html.twig' %}
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+

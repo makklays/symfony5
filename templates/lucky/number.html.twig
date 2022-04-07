@@ -1,19 +1,34 @@
 {% extends 'layouts/main12.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Hello Animales!{% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="col-md-12">
-        <h1>{{ page_title }}</h1>
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('index') }}">Página principl</a></i>
+                    <li class="breadcrumb-item"><a href="{{ path('lucky') }}">Lucky</a></i>
+                    <li class="breadcrumb-item active">Lucky number</i>
+                </ol>
+            </nav>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        Fatima\'s lucky number: {{ num }}
+
+    <div class="row">
+        <div class="col-md-8">
+            
+            <h2>Lucky number</h2>
+
+            Fatima's lucky number: {{ num }}
+        </div>
+
+        <div class="col-md-4">
+            {% include 'layouts/menu.html.twig' %}
+        </div>
     </div>
-    <div class="col-md-6">
-        {{ include('lucky/block.html.twig', {title_block: page_title}) }}
-    </div> 
 </div>    
 {% endblock body %}
+

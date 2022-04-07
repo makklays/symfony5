@@ -1,0 +1,102 @@
+{% extends 'layouts/main12.html.twig' %}
+
+{% block title %}Lista de pacientes!{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('index') }}">Página principle</a></i>
+                    <li class="breadcrumb-item"><a href="{{ path('paciente_index') }}">Pacientes</a></i>
+                    <li class="breadcrumb-item active">Editar los datos de paciente</i>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9">
+
+            <h1>Editar paciente</h1>
+
+            {# read and display all message #}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            {{ form_start(form, {'method': 'POST'}) }}
+                {{ form_errors(form) }}
+
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        {% if paciente.foto != null %}
+                            <img src="{{ asset('uploads/pacientes/fotos/' ~ paciente.foto) }}" style="width:100%;" class="img-fluid">
+                        {% else %}
+                            <img src="{{ asset('images/empty.jpg') }}" style="width:100%;" class="img-fluid">
+                        {% endif %}    
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.firstname, {'attr': {'class': 'foo'}}) }}
+                        
+                        {{ form_row(form.lastname) }}
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_row(form.bithday.day) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(form.bithday.month) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(form.bithday.year, {'label': 'Year'}) }}
+                            </div>
+                        </div>
+
+                        {{ form_row(form.mobile) }}
+                        
+                        {{ form_row(form.email) }}
+                        
+                        {{ form_row(form.pud) }}
+                        
+                        {{ form_row(form.doctor_id) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.foto) }} 
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.address) }}  
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="{{ path('paciente_index') }}" class="btn btn-dark"><< Cancelar</a> 
+                        {{ form_widget(form.submit, { 'label': 'Añadir paciente' }) }}
+                    </div>
+                </div>
+
+            {{ form_end(form) }}
+
+            <br/><br/><br/>
+
+        </div>
+        <div class="col-md-3">
+            
+            {% include 'layouts/menu.html.twig' %}
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
