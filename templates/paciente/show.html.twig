@@ -3,10 +3,8 @@
 {% block title %}Pacientes!{% endblock %}
 
 {% block body %}
-<div class="container">
-    
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="background-color:#e7e7e7; margin-bottom:0;">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ path('index') }}">Página principle</a></i>
@@ -20,6 +18,7 @@
     <div class="row">
         <div class="col-md-9">
 
+            <br/>
             {% if paciente.firstname != null %}
                 <h1>{{ paciente.firstname }} {{ paciente.lastname }}</h1>
             {% else %}
@@ -86,7 +85,5 @@
 
         </div>
     </div>
-
-</div>
 {% endblock %}
 

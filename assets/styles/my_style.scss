@@ -9,6 +9,7 @@ body {
 }
 
 .my-menu {
+    margin-top: 15px;
     border: 1px solid grey;
     background-color: #e7e7e7;
     border-radius: 5px;
@@ -69,4 +70,40 @@ label {
     border: 1px solid grey; 
     background-color: #e7e7e7; 
     border-radius: 5px;
+}
+.main-banner {
+    margin-top:20px; 
+    border: 1px solid grey; 
+    background-color: #e7e7e7; 
+    border-radius: 5px;
+    color: #000000;
+    padding: 15px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.a_menu {
+    font-size:16px;
+    color:#000000;
+    text-decoration: none;
+}
+.a_subscribe {
+    font-size:14px;
+    color:#010010;
+    text-decoration: none;
+}
+
+.line-menu {
+    display:flex; 
+    border-top:1px solid #e7e7e7; 
+    border-bottom:1px solid #e7e7e7; 
+    margin-bottom:21px;
+}
+.div-menu {
+    padding: 12px 30px;   
+}
+ol.breadcrumb {
+    margin-bottom: 0;
 }
