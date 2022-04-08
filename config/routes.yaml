@@ -23,6 +23,10 @@ app_lucky_frase:
 login:
   path: /login/
   controller: App\Controller\AuthController::login
+# Register
+registr:
+  path: /registrarse/
+  controller: App\Controller\AuthController::registr  
 
 # API
 api_post_index:

@@ -24,8 +24,54 @@
         <link rel="stylesheet" type="text/css" href="/build/app.css" />
     </head>
     <body>
-        
-        {% block body %}{% endblock %}
 
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-left">
+                    <div style="margin-top:15px;">
+                        <a href="{{ path('index') }}" class="a_subscribe">Subscribirse</a>
+                    </div>
+                </div>    
+                <div class="col-md-4 text-center">
+                    <a href="{{ path('index') }}" style="color:#198754; font-size:40px; text-decoration:none;">MiHospital</a>
+                </div>
+                <div class="col-md-4 text-right">
+                    <div style="margin-top:10px;">
+                        <a href="{{ path('login') }}" class="btn btn-outline-success">Entrar</a> 
+                        <a href="{{ path('registr') }}" class="btn btn-success">Registrarse</a>
+                    </div>    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 line-menu">
+
+                    <div class="div-menu">
+                        <a href="{{ path('paciente_index') }}" class="a_menu">Pacientes</a>
+                    </div>
+                    <div class="div-menu">
+                        <a href="{{ path('paciente_index') }}" class="a_menu">Doctoras</a>
+                    </div>
+                    <div class="div-menu">
+                        <a href="{{ path('animals_index') }}" class="a_menu">Animales</a>
+                    </div>
+                    <div class="div-menu">
+                        <a href="{{ path('lucky') }}" class="a_menu">Lucky</a>
+                    </div>
+                    <div class="div-menu">
+                        <a href="{{ path('index') }}" class="a_menu">Comentarios</a>
+                    </div>
+                    <div class="div-menu">
+                        <a href="{{ path('index') }}" class="a_menu">Comentarios</a>
+                    </div>
+                    <div class="div-menu">
+                        <a href="{{ path('index') }}" class="a_menu">Comentarios</a>
+                    </div>
+                    
+                </div>    
+            </div>
+            
+            {% block body %}{% endblock %}
+
+        </div>
     </body>
 </html>
