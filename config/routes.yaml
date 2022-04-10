@@ -6,6 +6,10 @@ info:
   path: /muy-importante-info
   controller: App\Controller\MainController::info
 
+map:
+  path: /map
+  controller: App\Controller\MainController::map
+
 # Lucky
 lucky:
   path: /lucky/

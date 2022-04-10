@@ -18,4 +18,9 @@ class MainController extends AbstractController
     {
         return $this->render('main/info.html.twig');
     }
+
+    public function map()
+    {
+        return $this->render('main/map.html.twig');
+    }
 }
