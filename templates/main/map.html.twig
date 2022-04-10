@@ -1,0 +1,119 @@
+{% extends 'layouts/main12.html.twig' %}
+
+{% block title %}Hello Animals!{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-9">
+
+        <h1>Google Maps API en MiMap</h1>
+
+        <div id="map" class="map"></div>
+    
+    </div>
+
+    <div class="col-md-3">
+        <div>
+            Puntos:
+            <ul>
+                <li>Pacientes: 1</li> 
+                <li>Doctores: 0</li>
+                <li>Animales: 1</li>
+            </ul>        
+        </div>
+    </div>
+</div>
+
+<!-- Map Google API -->
+<!-- ¿Donde esta un perro? -->
+
+<script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+<script>
+    //var map;
+    function initMap() {
+        
+        const map = new google.maps.Map(
+            document.getElementById("map"), {
+                zoom: 5,
+                center: { lat: 41.290057, lng: 1.9783533 },
+            });       
+
+        const infoWindow = new google.maps.InfoWindow({
+            content: "",
+            disableAutoPan: true,
+        });       
+
+        const labels = "В";
+        const labelss = "What here?";
+
+        // Add some markers to the map.
+        const markers = locations.map((position, i) => {
+            const label = [i % labels.length];
+            const marker = new google.maps.Marker({
+                position,
+                label,
+            });
+
+            // markers can only be keyboard focusable when they have click listeners
+            // open info window when marker is clicked
+            marker.addListener("click", () => {
+                infoWindow.setContent(labelss);
+                infoWindow.open(map, marker);
+            });
+
+            return marker;
+        });
+
+        // Add a marker clusterer to manage the markers.
+        const markerCluster = new markerClusterer.MarkerClusterer({ map, markers });
+
+        const styledMapType = new google.maps.StyledMapType(
+            [
+                { elementType: "labels.text.fill", stylers: [{ color: "#198754" }] },
+                { elementType: "labels.text.stroke", stylers: [{ color: "#f5f1e6" }] },
+                {
+                    featureType: "administrative",
+                    elementType: "geometry.stroke",
+                    stylers: [{ color: "#c9b2a6" }],
+                },
+                /*{
+                    featureType: "administrative.land_parcel",
+                    elementType: "geometry.stroke",
+                    stylers: [{ color: "#dcd2be" }],
+                },
+                {
+                    featureType: "administrative.land_parcel",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#ae9e90" }],
+                },
+                {
+                    featureType: "landscape.natural",
+                    elementType: "geometry",
+                    stylers: [{ color: "#dfd2ae" }],
+                },*/
+            ]);
+
+        // style map 
+        map.mapTypes.set("styled_map", styledMapType);
+        map.setMapTypeId("styled_map");
+
+    }
+
+    const locations = [
+        { lat: 41.290057, lng: 1.9783533 },
+        { lat: 41.491731, lng: 2.276487 },
+        
+        /*{ lat: 45.456431, lng: 33.564345 },
+        { lat: 45.396675, lng: 33.646056 },
+        { lat: 45.343613, lng: 36.439458 },
+        { lat: 44.430995, lng: 34.123403 },
+        { lat: 44.420942, lng: 34.030491 },
+        { lat: 44.596247, lng: 33.544475 },
+        { lat: 45.217754, lng: 33.285738 },*/
+    ];
+    
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARJ6syX24A-hsZMsKFIufHeQYCgevlv4Q&callback=initMap&language=es" async defer></script>
+
+{% endblock %}
+
