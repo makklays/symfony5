@@ -100,3 +100,21 @@ paciente_edit:
   controller: App\Controller\PacienteController::edit
   methods: POST|GET
 
+# Lead
+lead_index:
+  path: /leads
+  controller: App\Controller\LeadController::index
+  methods: GET 
+lead_add:
+  path: /leads/add
+  controller: App\Controller\LeadController::add
+  methods: POST|GET 
+lead_show:
+  path: /leads/show/{id}
+  controller: App\Controller\LeadController::show
+  methods: POST|GET 
+lead_edit:
+  path: /leads/edit/{id} 
+  controller: App\Controller\LeadController::edit
+  methods: POST|GET 
+
