@@ -84,21 +84,40 @@ paciente_index:
   path: /pacientes
   controller: App\Controller\PacienteController::index
   methods: GET
-
 paciente_add:
   path: /pacientes/add
   controller: App\Controller\PacienteController::add
   methods: POST|GET
-  
 paciente_show:
   path: /pacientes/show/{id}
   controller: App\Controller\PacienteController::show
   methods: POST|GET
-
 paciente_edit:
   path: /pacientes/edit/{id}
   controller: App\Controller\PacienteController::edit
   methods: POST|GET
+ 
+# Doctor 
+doctor_index:
+  path: /doctors
+  controller: App\Controller\DoctorController::index
+  methods: GET
+doctor_add:
+  path: /doctors/add
+  controller: App\Controller\DoctorController::add
+  methods: POST|GET 
+doctor_show:
+  path: /doctors/show/{id}
+  controller: App\Controller\DoctorController::show
+  methods: POST|GET 
+doctor_edit:
+  path: /doctors/edit/{id}
+  controller: App\Controller\DoctorController::edit
+  methods: POST|GET     
+doctor_lista:
+  path: /doctors/lista-de-pacientes/{id}
+  controller: App\Controller\DoctorController::lista
+  methods: GET 
 
 # Lead
 lead_index:

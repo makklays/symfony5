@@ -1,6 +1,6 @@
 {% extends 'layouts/main12.html.twig' %}
 
-{% block title %}Lista de pacientes!{% endblock %}
+{% block title %}Lista de pacientes de doctor!{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -10,50 +10,45 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ path('index') }}">Página principle</a></i>
-                    <li class="breadcrumb-item active">Pacientes</i>
+                    <li class="breadcrumb-item"><a href="{{ path('doctor_index') }}">Doctors</a></i>
+                    <li class="breadcrumb-item"><a href="{{ path('doctor_show', {id: doctor.id}) }}">{{ doctor.firstname }} {{ doctor.lastname }}</a></i>
+                    <li class="breadcrumb-item active">Lista de pacientes</i>
                 </ol>
             </nav>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-9" style="margin-top:21px;">
+        <div class="col-md-9" style="margin-top: 21px;">
 
             <div class="row">
-                <div class="col-md-8">
-                    <h1>Pacientes</h1>
+                <div class="col-md-11">
+                    <h1>{{ doctor.firstname }} {{ doctor.lastname }}</h1>
+                    <h5 style="color:#6c757d;">Lista de pacientes</h5>
                 </div>    
-                <div class="col-md-4">
+                <div class="col-md-1">
                     <div style="text-align:right;">
-                        <a href="{{ path('paciente_add') }}" class="btn btn-success">Añadir nueva paciente</a> 
+                    
                     </div>
                 </div>
             </div>
 
-            {# read and display all message #}
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="flash-{{ label }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-
-            {% if pacientes %}
+            {% if doctor %}
                 <table class="table">
                     <thead>
                         <tr>
                         <th scope="col" class="text-center">#ID</th>
                         <th scope="col" class="text-center">Nombre Apellido</th>
                         <th scope="col" class="text-center">Móvil</th>
+                        <th scope="col" class="text-center">NIE</th>
                         <th scope="col" class="text-center">Foto</th>
-                        <th scope="col" class="text-center">Doctor</th>
+                        <th scope="col" class="text-center">Cumpleaño</th>
                         <th scope="col" class="text-center" style="width:170px;">Acciónes</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        {% for item in pacientes %}
+                        {% for item in doctor.pacientes() %}
                             <tr>
                                 <th class="text-center" scope="row">{{ item.id }}</th>
                                 <td class="text-center"><a href="{{ path('paciente_show', {'id': item.id}) }}" title="{{ item.firstname }}" >{{ item.firstname }} {{ item.lastname }}</a> </td>
@@ -64,6 +59,7 @@
                                         no tiene
                                     {% endif %}
                                 </td>
+                                <td class="text-center" scope="row">{{ item.nie }}</td>
                                 <td class="text-center">
                                     {% if item.foto != null %}
                                         <span class="badge badge-success">sí</span>
@@ -72,13 +68,10 @@
                                     {% endif %}
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ path('doctor_show', {id: item.doctor.id}) }}">
-                                        {{ item.doctor.firstname }} {{ item.doctor.lastname }}
-                                    </a>
+                                    {{ item.birthday.format('d.m.Y') }}
                                 </td>
                                 <td class="text-center">
-                                    <i class="fa fa-list"></i> <a href="{{ path('paciente_show', {id: item.id}) }}" title="Mirar" >mirar</a> | 
-                                    <i class="fa fa-edit"></i> <a href="{{ path('paciente_edit', {id: item.id}) }}" title="Editar" >editar</a>
+                                    <i class="fa fa-list"></i> <a href="{{ path('paciente_show', {id: item.id}) }}" title="Mirar" >mirar</a>
                                 </td>
                             </tr>
                         {% endfor %}

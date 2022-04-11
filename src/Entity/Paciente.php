@@ -40,12 +40,12 @@ class Paciente
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $pud;
+    private $nie;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $bithday;
+    private $birthday;
 
     /**
      * @ORM\Column(type="integer")
@@ -71,6 +71,12 @@ class Paciente
      * @ORM\Column(type="datetime")
      */
     private $modified_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Doctor::class, inversedBy="pacientes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $doctor;
 
     public function getId(): ?int
     {
@@ -125,26 +131,26 @@ class Paciente
         return $this;
     }
 
-    public function getPud(): ?string
+    public function getNie(): ?string
     {
-        return $this->pud;
+        return $this->nie;
     }
 
-    public function setPud(?string $pud): self
+    public function setNie(?string $nie): self
     {
-        $this->pud = $pud;
+        $this->nie = $nie;
 
         return $this;
     }
 
-    public function getBithday(): ?\DateTimeInterface
+    public function getBirthday(): ?\DateTimeInterface
     {
-        return $this->bithday;
+        return $this->birthday;
     }
 
-    public function setBithday(?\DateTimeInterface $bithday): self
+    public function setBirthday(?\DateTimeInterface $birthday): self
     {
-        $this->bithday = $bithday;
+        $this->birthday = $birthday;
 
         return $this;
     }
@@ -205,6 +211,18 @@ class Paciente
     public function setModifiedAt(\DateTimeInterface $modified_at): self
     {
         $this->modified_at = $modified_at;
+
+        return $this;
+    }
+
+    public function getDoctor(): ?Doctor
+    {
+        return $this->doctor;
+    }
+
+    public function setDoctor(?Doctor $doctor): self
+    {
+        $this->doctor = $doctor;
 
         return $this;
     }

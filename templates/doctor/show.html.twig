@@ -1,6 +1,6 @@
 {% extends 'layouts/main12.html.twig' %}
 
-{% block title %}Pacientes!{% endblock %}
+{% block title %}Doctors!{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -8,8 +8,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ path('index') }}">Página principle</a></i>
-                    <li class="breadcrumb-item"><a href="{{ path('paciente_index') }}">Pacientes</a></i>
-                    <li class="breadcrumb-item active">Los datos de paciente - {{ paciente.firstname }} {{ paciente.lastname }}</i>
+                    <li class="breadcrumb-item"><a href="{{ path('doctor_index') }}">Doctors</a></i>
+                    <li class="breadcrumb-item active">Los datos de doctor - {{ doctor.firstname }} {{ doctor.lastname }}</i>
                 </ol>
             </nav>
         </div>
@@ -19,72 +19,75 @@
         <div class="col-md-9">
 
             <br/>
-            {% if paciente.firstname != null %}
-                <h1>{{ paciente.firstname }} {{ paciente.lastname }}</h1>
+            {% if doctor.firstname != null %}
+                <h1>{{ doctor.firstname }} {{ doctor.lastname }}</h1>
             {% else %}
-                <h1>Los datos de paciente</h1>
+                <h1>Los datos de doctor</h1>
             {% endif %}    
 
             <div class="row">
                 <div class="col-md-6 text-center">
-                    {% if paciente.foto != null %}
-                        <img src="{{ asset('uploads/pacientes/fotos/' ~ paciente.foto) }}" style="width:100%;" class="img-fluid">
+                    {% if doctor.foto != null %}
+                        <img src="{{ asset('uploads/doctors/fotos/' ~ doctor.foto) }}" style="width:100%;" class="img-fluid">
                     {% else %}
                         <img src="{{ asset('images/empty.jpg') }}" style="width:100%;" class="img-fluid">
                     {% endif %}    
                 </div>
                 <div class="col-md-6">
                     <p>
-                        <b>Nombre:</b> {{ paciente.firstname }}
+                        <b>Nombre:</b> {{ doctor.firstname }}
                     </p>
                     
                     <p>
-                        <b>Apellido:</b> {{ paciente.lastname }}
+                        <b>Apellido:</b> {{ doctor.lastname }}
                     </p>
                     
                     <p>
-                        <b>Cumpleaños:</b> {{ paciente.birthday.format('d.m.Y') }}
-                    </p>
-                    
-                    <p>
-                        <b>Móvil:</b> {{ paciente.mobile }}
-                    </p>
-                    
-                    <p>
-                        <b>Corréo:</b> {{ paciente.email }}
-                    </p>
-                    
-                    <p>
-                        <b>NIE:</b> {{ paciente.nie }}
-                    </p>
-                    
-                    <p>
-                        <b>Doctor ID: </b> {{ paciente.getDoctorId() }}
-                    </p>
-                    <p>
-                        <b>Doctor: </b> 
-                        <a href="{{ path('doctor_show', {id: paciente.doctor.id}) }}">
-                            {{ paciente.doctor.firstname }} {{ paciente.doctor.lastname }}
-                        </a>
-                    </p>    
-
-                    <p>
-                        <b>Dirección:</b><br/> {{ paciente.address | nl2br }}
+                        <b>Título:</b>
+                        <br/> 
+                        {{ doctor.title }}
                     </p>
 
                     <p>
-                        <b>Fecha creó:</b> {{ paciente.getCreatedAt().format('j F Y H:i') }}
+                        <b>ID Doctor: </b> {{ doctor.getSectionId() }}
                     </p>
 
                     <p>
-                        <b>Fecha modifió:</b> {{ paciente.getModifiedAt().format('d.m.Y H:i') }}
+                        <b>Cantidad de paciente: </b> 
+                        <a href="{{ path('doctor_lista', {id: doctor.id}) }}">Lista de pacientes [{{ doctor.pacientes.count() }}]</a>
+                    </p>
+
+                    <p>
+                        <b>Movíle:</b> {{ doctor.mobile }}
+                    </p>
+
+                    <p>
+                        <b>Cumpleaños:</b> {{ doctor.getBirthday().format('d.m.Y') }}
+                    </p>
+                    
+                    <p>
+                        <b>Seniority:</b> {{ doctor.years }}
+                    </p>
+                    
+                    <p>
+                        <b>Biográfico:</b>
+                        <br/> 
+                        {{ doctor.bio | nl2br }}
+                    </p>
+
+                    <p>
+                        <b>Fecha creó:</b> {{ doctor.getCreatedAt().format('d.m.Y H:i:s') }}
+                    </p>
+
+                    <p>
+                        <b>Fecha modifió:</b> {{ doctor.getModifiedAt().format('d.m.Y H:i:s') }}
                     </p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6" style="margin-top: 18px;">
-                    <a href="{{ path('paciente_index') }}" class="btn btn-dark"><< Cancelar</a> 
+                    <a href="{{ path('doctor_index') }}" class="btn btn-dark"><< Cancelar</a> 
                 </div>
             </div>
 

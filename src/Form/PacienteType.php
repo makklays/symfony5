@@ -17,6 +17,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Doctor;
 
 class PacienteType extends AbstractType
 {
@@ -29,7 +31,7 @@ class PacienteType extends AbstractType
             ])
             ->add('lastname', TextType::class, [
                 'attr' => ['class' => 'input-group'],
-                'label' => 'Apeido',
+                'label' => 'Apellido',
             ])
             ->add('mobile', TextType::class, [
                 'attr' => ['class' => 'input-group'],
@@ -39,17 +41,17 @@ class PacienteType extends AbstractType
                 'attr' => ['class' => 'input-group'],
                 'label' => 'Corréo',
             ])
-            ->add('pud', TextType::class, [
+            ->add('nie', TextType::class, [
                 'attr' => ['class' => 'input-group'],
                 'label' => 'NIE',
             ])
-            ->add('bithday', DateType::class, [
+            ->add('birthday', DateType::class, [
                 'format' => 'y M d',
-                'label' => 'Nacer',
+                'label' => 'Cumpleaños',
                 'attr' => ['class' => 'input-group'],
                 /*'days' => range(1,31),*/
                 'placeholder' => [
-                    'year' => 'Year', 'month' => 'Month', 'day' => 'Birthday',
+                    'year' => 'Año', 'month' => 'Mes', 'day' => 'Cumpleaños',
                 ],
                 /*'attr' => ['style' => 'width:200px; display:flex; margin-right:10px;'],*/
                 //'widget' => 'choice', //'single_text',
@@ -57,7 +59,17 @@ class PacienteType extends AbstractType
             ])
             ->add('doctor_id', TextType::class, [
                 'attr' => ['class' => 'input-group'],
-                'label' => 'Doctora',
+                'label' => 'Doctor',
+            ])
+            ->add('doctor', EntityType::class, [
+                'attr' => ['class' => 'form-group'],
+                'required' => true,
+                'class' => Doctor::class,
+                'placeholder' => '-- Elige doctor --',
+                'label' => 'Doctor',
+                'choice_label' => function($doctor){
+                    return $doctor->getFirstname() . ' ' . $doctor->getLastname();
+                },
             ])
             ->add('address', TextType::class, [
                 'attr' => ['class' => 'input-group'],
