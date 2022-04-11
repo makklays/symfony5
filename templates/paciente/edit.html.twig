@@ -18,7 +18,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9" style="margin-top: 21px;">
 
             <h1>Editar paciente</h1>
 
@@ -49,13 +49,13 @@
                         
                         <div class="row">
                             <div class="col-md-4">
-                                {{ form_row(form.bithday.day) }}
+                                {{ form_row(form.birthday.day, {'label': 'Día'}) }}
                             </div>
                             <div class="col-md-4">
-                                {{ form_row(form.bithday.month) }}
+                                {{ form_row(form.birthday.month, {'label': 'Mes'}) }}
                             </div>
                             <div class="col-md-4">
-                                {{ form_row(form.bithday.year, {'label': 'Year'}) }}
+                                {{ form_row(form.birthday.year, {'label': 'Año'}) }}
                             </div>
                         </div>
 
@@ -63,25 +63,32 @@
                         
                         {{ form_row(form.email) }}
                         
-                        {{ form_row(form.pud) }}
+                        {{ form_row(form.nie) }}
                         
                         {{ form_row(form.doctor_id) }}
+
+                        {{ form_row(form.doctor) }}
+
+                        {{ form_row(form.address) }} 
+
+                        {{ form_row(form.foto) }} 
+
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        {{ form_row(form.foto) }} 
+                        
                     </div>
                     <div class="col-md-6">
-                        {{ form_row(form.address) }}  
+                         
                     </div>
                 </div>
                 
                 <div class="row">
                     <div class="col-md-6">
                         <a href="{{ path('paciente_index') }}" class="btn btn-dark"><< Cancelar</a> 
-                        {{ form_widget(form.submit, { 'label': 'Añadir paciente' }) }}
+                        {{ form_widget(form.submit, { 'label': 'Guardar paciente' }) }}
                     </div>
                 </div>
 

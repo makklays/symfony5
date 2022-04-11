@@ -1,6 +1,6 @@
 {% extends 'layouts/main12.html.twig' %}
 
-{% block title %}Lista de pacientes!{% endblock %}
+{% block title %}Lista de doctors!{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -10,8 +10,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ path('index') }}">Página principle</a></i>
-                    <li class="breadcrumb-item"><a href="{{ path('paciente_index') }}">Pacientes</a></i>
-                    <li class="breadcrumb-item active">Añadir paciente</i>
+                    <li class="breadcrumb-item"><a href="{{ path('doctor_index') }}">Doctors</a></i>
+                    <li class="breadcrumb-item active">Añadir doctor</i>
                 </ol>
             </nav>
         </div>
@@ -20,14 +20,18 @@
     <div class="row">
         <div class="col-md-8">
 
-            <h1>Nueva paciente</h1>
+            <h1  style="margin-top:21px;">Nuevo doctor</h1>
 
             {{ form_start(form, {'method': 'POST'}) }}
                 {{ form_errors(form) }}
 
                 <div class="row">
                     <div class="col-md-6 text-center">
-                        <img src="{{ asset('images/empty.jpg') }}" style="width:100%;" class="img-fluid">
+                        {% if doctor.foto != null %}
+                            <img src="{{ asset('uploads/doctors/fotos/' ~ doctor.foto) }}" style="width:100%;" class="img-fluid" />
+                        {% else %}
+                            <img src="{{ asset('images/empty.jpg') }}" style="width:100%;" class="img-fluid" />
+                        {% endif %}
                     </div>
                     <div class="col-md-6">
                         {{ form_row(form.firstname, {'attr': {'class': 'foo'}}) }}
@@ -36,36 +40,38 @@
                         
                         <div class="row">
                             <div class="col-md-4">
-                                {{ form_row(form.bithday.day, {'label': 'Día'}) }}
+                                {{ form_row(form.birthday.day) }}
                             </div>
                             <div class="col-md-4">
-                                {{ form_row(form.bithday.month, {'label': 'Mes'}) }}
+                                {{ form_row(form.birthday.month) }}
                             </div>
                             <div class="col-md-4">
-                                {{ form_row(form.bithday.year, {'label': 'Año'}) }}
+                                {{ form_row(form.birthday.year, {'label': 'Year'}) }}
                             </div>
                         </div>
 
+                        {{ form_row(form.title) }}
+
                         {{ form_row(form.mobile) }}
+
+                        {{ form_row(form.years) }}
                         
-                        {{ form_row(form.email) }}
+                        {{ form_row(form.bio) }}
                         
-                        {{ form_row(form.pud) }}
-                        
-                        {{ form_row(form.doctor_id) }}
+                        {{ form_row(form.section_id) }}
+
+                        {{ form_row(form.foto) }}
+
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        {{ form_row(form.foto) }} 
+                        <a href="{{ path('doctor_index') }}" class="btn btn-dark"><< Cancelar</a> 
+                        <input type="submit" class="btn btn-success" value="Guardar" />
                     </div>
-                    <div class="col-md-6">
-                        {{ form_row(form.address) }}  
-                    </div>
-                </div>
-                
-                {{ form_row(form.submit, { 'label': 'Añadir paciente' }) }}
+                </div>    
+
             {{ form_end(form) }}
 
             <br/><br/><br/>

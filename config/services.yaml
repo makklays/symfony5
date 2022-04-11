@@ -6,6 +6,7 @@
 parameters:
     img_directory: '%kernel.project_dir%/public/uploads/imgs'
     foto_pacient_directory: '%kernel.project_dir%/public/uploads/pacientes/fotos'
+    foto_doctor_directory: '%kernel.project_dir%/public/uploads/doctors/fotos'
 
 services:
     # default configuration for services in *this* file
