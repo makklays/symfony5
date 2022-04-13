@@ -1,0 +1,47 @@
+{% if total_page > 1 %}
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div style="height:35px;">
+                {% for i in 1..total_page %}
+                    {% if (i == 1 and page >= 4) %}
+                        <a href="{{ path('doctor_index', {page: i}) }}" class="mypage">{{ i }}</a> ... 
+                    {% endif %}
+                    
+                    {%if (page == total_page-1 and i == page-3) %}
+                        <a href="{{ path('doctor_index', {page: page-4}) }}" class="mypage">{{ page-4 }}</a>
+                    {% endif %}
+                    {% if (page == total_page and i == page-3) %}
+                        <a href="{{ path('doctor_index', {page: page-4}) }}" class="mypage">{{ page-4 }}</a>
+                        <a href="{{ path('doctor_index', {page: page-3}) }}" class="mypage">{{ page-3 }}</a> 
+                    {% endif %}
+                    {% if (1 <= page-2 and page-2 <= total_page and page-2 == i) %}
+                        <a href="{{ path('doctor_index', {page: page-2}) }}" class="mypage">{{ page-2 }}</a> 
+                    {% endif %}
+                    {% if (1 <= page-1 and page-1 <= total_page and page-1 == i) %}
+                        <a href="{{ path('doctor_index', {page: page-1}) }}" class="mypage">{{ page-1 }}</a> 
+                    {% endif %}
+                    {% if (1 <= page and page <= total_page and page == i) %}
+                        <a href="{{ path('doctor_index', {page: page}) }}" class="mypage active">{{ page }}</a> 
+                    {% endif %}
+                    {% if (1 <= page+1 and page+1 <= total_page and page+1 == i) %}
+                        <a href="{{ path('doctor_index', {page: page+1}) }}" class="mypage">{{ page+1 }}</a> 
+                    {% endif %}
+                    {% if (1 <= page+2 and page+2 <= total_page and page+2 == i) %}
+                        <a href="{{ path('doctor_index', {page: page+2}) }}" class="mypage">{{ page+2 }}</a> 
+                    {% endif %}
+                    {% if (page == 1 and i == page+3) %}
+                        <a href="{{ path('doctor_index', {page: 4}) }}" class="mypage">4</a>
+                        <a href="{{ path('doctor_index', {page: 5}) }}" class="mypage">5</a> 
+                    {% endif %}
+                    {% if (page == 2 and i == page+3) %}
+                        <a href="{{ path('doctor_index', {page: 5}) }}" class="mypage">5</a> 
+                    {% endif %}
+
+                    {% if (i == total_page and page <= total_page-3) %}
+                        ... <a href="{{ path('doctor_index', {page: i}) }}" class="mypage">{{ i }}</a> 
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}

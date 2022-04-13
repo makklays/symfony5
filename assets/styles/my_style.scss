@@ -122,3 +122,22 @@ ol.breadcrumb {
 .form-group {
     margin-bottom: 7px;
 }
+
+.mypage {
+    padding: 8px 18px;
+    background-color: #FFFFFF;
+    color: #373b3f;
+    text-decoration: none;
+    margin: 2px;
+    border-radius: 4px;
+    border: 1px solid #e7e7e7;
+}
+.mypage:hover {
+    background-color: #198754;
+    color: #000123;
+}
+.mypage.active {
+    background-color: #c8ced4;
+    color: #373b3f;
+}
+

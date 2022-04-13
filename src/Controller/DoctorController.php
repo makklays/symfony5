@@ -8,21 +8,56 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Doctor;
 use App\Form\DoctorType;
+use App\Repository\DoctorRepository;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Psr\Log\LoggerInterface;
+use Doctrine\ORM\Query;
 
 class DoctorController extends AbstractController
 {
-    public function index(LoggerInterface $logger)
-    {
-        $doctors = $this->getDoctrine()->getRepository(Doctor::class)->findAll();
+    public function index(DoctorRepository $repository, Request $request, LoggerInterface $logger)
+    {   
+        //$doctors = $this->getDoctrine()->getRepository(Doctor::class)->findAll();
+
+        if (!empty($request->get('page'))) {
+            $page = $request->get('page');
+        } else {
+            $page = 1;
+        }
+
+        $onPage = 10;
+        $doctors = $repository->findAllByPage($page, $onPage); // limit
+        $countDoctors = $repository->findAllCount(); // all count
+        $pagesCount = ceil($countDoctors / $onPage);
+        
+        /*$doctors = $this->getDoctrine()->getRepository(Doctor::class);
+        $query = $doctors->createQueryBuilder('d')
+                    //->where('d.is_active = 1')    
+                    ->orderBy('d.lastname', 'ASC')
+                    ->orderBy('d.firstname', 'ASC')
+                    ->getQuery();
+
+        $pageSize = 1;
+        $paginator = new \Doctrine\ORM\Tools\Pagination\Paginator($query);
+        $totalItems = count($paginator);
+        $pagesCount = ceil($totalItems / $pageSize);
+        $doctors = $paginator->getQuery()
+            ->setFirstResult($pageSize * ($page - 1))
+            ->setMaxResults($pageSize)
+            ->getResult();
+        */    
+
+        //$doctors = $repository->findAllActivesss();
+        //$doctors = $this->getDoctrine()->getRepository(Doctor::class)->findAllActives();
 
         $logger->info('Show log: Lista de doctors ');
 
         return $this->render('doctor/index.html.twig', [
             'doctors' => $doctors,
+            'total_page' => $pagesCount,
+            'page' => $page, 
         ]);
     }
 
@@ -33,8 +68,13 @@ class DoctorController extends AbstractController
             throw $this->createNotFoundException('The doctor does not exist');
         }
 
+        $startDate = $doctor->getBirthday();
+        $nowDate = date_create();
+        $edad = date_diff($startDate, $nowDate);
+
         return $this->render('doctor/show.html.twig', [
             'doctor' => $doctor,
+            'edad' => $edad,
         ]);
     }
 
