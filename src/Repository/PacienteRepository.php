@@ -19,32 +19,75 @@ class PacienteRepository extends ServiceEntityRepository
         parent::__construct($registry, Paciente::class);
     }
 
-    // /**
-    //  * @return Paciente[] Returns an array of Paciente objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    // count all
+    public function findAllCount(int $page, int $onPage): int
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $query = $this->createQueryBuilder('p')->select('COUNT(p)')->getQuery();
 
-    /*
-    public function findOneBySomeField($value): ?Paciente
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $query->getResult();
     }
-    */
+
+    // items by page
+    public function findAllByPage(): array 
+    {
+        $query = $this->createQueryBuilder('p')
+            ->orderBy('p.firstname', 'ASC')
+            ->orderBy('p.lastname', 'ASC')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    // search nie
+    public function findAllByNie($number): array 
+    {
+        $query = $this->createQueryBuilder('p')
+            ->andWhere('p.nie LIKE :nie')
+            //->andWhere('p.nie LIKE :nie OR p.mobile LIKE :nie')
+            ->setParameter('nie', '%'.$number.'%')
+            ->orderBy('p.firstname', 'ASC')
+            ->orderBy('p.lastname', 'ASC')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    // one by nie
+    public function findOneByNie(string $number): ?Paciente
+    {
+        $query = $this->createQueryBuilder('p')
+            ->andWhere('p.nie = :number')
+            ->setParameter('number', $number)
+            ->getQuery();
+
+        return $query->getOneOrNullResult();    
+    }
+
+    // search móvil
+    public function findAllByMobile($number): array 
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where('p.mobile LIKE :numb')
+            ->setParameter('numb', '%'.$number.'%')
+            ->orderBy('p.firstname', 'ASC')
+            ->orderBy('p.lastname', 'ASC')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    // search Nombre
+    public function findAllByFullname($text): array 
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where('p.lastname LIKE :str')
+            ->orWhere('p.firstname LIKE :str')
+            ->setParameter('str', '%'.$text.'%')
+            ->orderBy('p.firstname', 'ASC')
+            ->orderBy('p.lastname', 'ASC')
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }
+

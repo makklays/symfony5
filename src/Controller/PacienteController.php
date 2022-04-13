@@ -12,15 +12,21 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Psr\Log\LoggerInterface;
+use App\Repository\PacienteRepository;
 
 class PacienteController extends AbstractController
 {
-    public function index(LoggerInterface $logger): Response
+    public function index(PacienteRepository $repository, LoggerInterface $logger): Response
     {
         $pacientes = $this->getDoctrine()
                         ->getRepository(Paciente::class)
                         ->findAll();
 
+        // para la p'agina de busqueta
+        //$pacientes = $repository->findAllByNie('11');
+        //$pacientes = $repository->findAllByFullname('nim');
+
+        // log
         $logger->info('Log!......');
 
         return $this->render('paciente/index.html.twig', [
@@ -132,10 +138,16 @@ class PacienteController extends AbstractController
                         ->getRepository(Paciente::class)
                         ->find($id);
 
+        // edad 
+        $startDate = $paciente->getBirthday();
+        $nowDate = date_create();
+        $edad = date_diff($startDate, $nowDate);                
+
         $logger->info('Paciente ID = ' . $paciente->getId() );
 
         return $this->render('paciente/show.html.twig', [
             'paciente' => $paciente,
+            'edad'     => $edad,
         ]);
     }
 }

@@ -21,6 +21,7 @@
             <br/>
             {% if paciente.firstname != null %}
                 <h1>{{ paciente.firstname }} {{ paciente.lastname }}</h1>
+                <h5 style="color:#6c757d;">Datos de paciente</h5>
             {% else %}
                 <h1>Los datos de paciente</h1>
             {% endif %}    
@@ -43,7 +44,12 @@
                     </p>
                     
                     <p>
-                        <b>Cumpleaños:</b> {{ paciente.birthday.format('d.m.Y') }}
+                        <div>
+                            <b>Cumpleaños:</b> {{ paciente.birthday.format('d.m.Y') }}
+                        </div>
+                        <div>
+                            <b>Edad:</b> {{ edad.y }}
+                        </div>
                     </p>
                     
                     <p>

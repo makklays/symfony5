@@ -21,6 +21,7 @@
             <br/>
             {% if doctor.firstname != null %}
                 <h1>{{ doctor.firstname }} {{ doctor.lastname }}</h1>
+                <h5 style="color:#6c757d;">Datos de doctor</h5>
             {% else %}
                 <h1>Los datos de doctor</h1>
             {% endif %}    
@@ -58,13 +59,18 @@
                     </p>
 
                     <p>
-                        <b>Movíle:</b> {{ doctor.mobile }}
+                        <b>Móvil:</b> {% if doctor.mobile | length > 0 %} {{ doctor.mobile }} {% else %} no tiene {% endif %}
                     </p>
 
                     <p>
-                        <b>Cumpleaños:</b> {{ doctor.getBirthday().format('d.m.Y') }}
+                        <div>
+                            <b>Cumpleaños:</b> {{ doctor.getBirthday().format('d.m.Y') }}
+                        </div>
+                        <div> 
+                            <b>Edad:</b> {{ edad.y }} 
+                        </div>    
                     </p>
-                    
+
                     <p>
                         <b>Seniority:</b> {{ doctor.years }}
                     </p>
@@ -76,11 +82,19 @@
                     </p>
 
                     <p>
-                        <b>Fecha creó:</b> {{ doctor.getCreatedAt().format('d.m.Y H:i:s') }}
+                        <b>Activo:</b> 
+                        {% if doctor.getIsActive() != null %}
+                            <span class="badge badge-success">sí</span>
+                        {% else %} 
+                            <span class="badge badge-danger">no</span>   
+                        {% endif %}
                     </p>
 
                     <p>
-                        <b>Fecha modifió:</b> {{ doctor.getModifiedAt().format('d.m.Y H:i:s') }}
+                        <b>Fecha creó:</b> {{ doctor.getCreatedAt().format('d.m.Y H:i') }}
+                    </p>
+                    <p>
+                        <b>Fecha modifió:</b> {{ doctor.getModifiedAt().format('d.m.Y H:i') }}
                     </p>
                 </div>
             </div>

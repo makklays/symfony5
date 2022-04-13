@@ -35,7 +35,7 @@ class PacienteType extends AbstractType
             ])
             ->add('mobile', TextType::class, [
                 'attr' => ['class' => 'input-group'],
-                'label' => 'Movile',
+                'label' => 'Móvil',
             ])
             ->add('email', TextType::class, [
                 'attr' => ['class' => 'input-group'],
@@ -50,16 +50,13 @@ class PacienteType extends AbstractType
                 'label' => 'Cumpleaños',
                 'attr' => ['class' => 'input-group'],
                 /*'days' => range(1,31),*/
+                'years' => range(2022,1920),
                 'placeholder' => [
                     'year' => 'Año', 'month' => 'Mes', 'day' => 'Cumpleaños',
                 ],
                 /*'attr' => ['style' => 'width:200px; display:flex; margin-right:10px;'],*/
                 //'widget' => 'choice', //'single_text',
                 'html5' => true,
-            ])
-            ->add('doctor_id', TextType::class, [
-                'attr' => ['class' => 'input-group'],
-                'label' => 'Doctor',
             ])
             ->add('doctor', EntityType::class, [
                 'attr' => ['class' => 'form-group'],

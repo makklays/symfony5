@@ -59,6 +59,10 @@ class DoctorType extends AbstractType
                 'required' => true,
                 'label' => 'Seniority',
             ])
+            ->add('is_active', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Activo'
+            ])
             ->add('foto', FileType::class, [
                 'required' => false,
                 'label' => 'La foto',

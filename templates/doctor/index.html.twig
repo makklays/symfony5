@@ -17,7 +17,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9" style="margin-top:21px;">
 
             <div class="row">
                 <div class="col-md-8">
@@ -43,11 +43,12 @@
                 <table class="table">
                     <thead>
                         <tr>
-                        <th scope="col" class="text-center">#ID</th>
+                        <th scope="col" class="text-center">ID</th>
                         <th scope="col" class="text-center">Fullname</th>
                         <th scope="col" class="text-center">Title</th>
                         <th scope="col" class="text-center">Pacientes</th>
                         <th scope="col" class="text-center">Foto</th>
+                        <th scope="col" class="text-center">Activo</th>
                         <th scope="col" class="text-center">SectionID</th>
                         <th scope="col" class="text-center" style="width:170px;">Acciónes</th>
                         </tr>
@@ -71,6 +72,13 @@
                                         <span class="badge badge-danger">no</span>   
                                     {% endif %}
                                 </td>
+                                <td class="text-center">
+                                    {% if item.getIsActive() != null %}
+                                        <span class="badge badge-success">sí</span>
+                                    {% else %} 
+                                        <span class="badge badge-danger">no</span>   
+                                    {% endif %}
+                                </td>
                                 <td class="text-center">{{ item.getSectionId() }}</td>
                                 <td class="text-center">
                                     <i class="fa fa-list"></i> <a href="{{ path('doctor_show', {id: item.id}) }}" title="Mirar" >mirar</a> | 
@@ -84,6 +92,10 @@
             {% else %}
                 <i>No tiene ningunas doctors</i>
             {% endif %}
+
+            <div>
+                {% include 'partials/paging.html.twig' with {'foo': 'bar'} %}
+            </div>
 
         </div>
         <div class="col-md-3">
