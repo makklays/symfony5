@@ -1,24 +1,71 @@
 security:
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
+    # for trottling 
+    #enable_authenticator_manager: true
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+        # When using a 'memory' provider, and not the 'auto' algorithm, you have to choose an encoding without salt (i.e. 'bcrypt').
+        #backend_provider:
+        #    memory:
+        #        user:
+        #            alexander1_admin: { password: $12..11, roles: ['ROLE_ADMIN'] }
+        #            alexander2_admin: { password: $21..11, roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] }    
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        #secured_area:
+        #    http_basic: ~ 
+        #    pattern: ^/doctors
+        #    anonymous: ~
         main:
             anonymous: true
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
+            
+            logout:
+                path: logout
+                target: index  
 
+            #login_throttling:
+            #    max_attempts: 3
+    
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # allow unauthenticated users to access the login form
+        - { path: '^/login', roles: PUBLIC_ACCESS }
+        # require ROLE_ADMIN for /admin*
+        - { path: '^/admin', roles: ROLE_ADMIN }
+        - { path: '^/doctors', roles: ROLE_ADMIN }
+        - { path: '^/pacientes', roles: ROLE_ADMIN }
+        - { path: '^/dashboard', roles: ROLE_PACIENTE }
+        - { path: '^/cabinet', roles: ROLE_DOCTOR }
+        # or require ROLE_... for /admin*
+        - { path: '^/profile', roles: [IS_AUTHENTICATED_FULLY, ROLE_USER] }
+        # the 'ips' option supports IP addresses and subnet masks
+        - { path: '^/pagina-interior', role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1, 192.168.0.1/24] }
+        # by https 
+        - { path: '^/cart/checkout', role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+
+    role_hierarchy:
+        ROLE_USER: ROLE_USER 
+        ROLE_DOCTOR: ROLE_DOCTOR
+        ROLE_PACIENTE: ROLE_PACIENTE 
+        ROLE_ADMIN: [ROLE_USER, ROLE_DOCTOR, ROLE_PACIENTE]
+
