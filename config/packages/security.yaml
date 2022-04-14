@@ -51,11 +51,11 @@ security:
         # allow unauthenticated users to access the login form
         - { path: '^/login', roles: PUBLIC_ACCESS }
         # require ROLE_ADMIN for /admin*
-        - { path: '^/admin', roles: ROLE_ADMIN }
-        - { path: '^/doctors', roles: ROLE_ADMIN }
-        - { path: '^/pacientes', roles: ROLE_ADMIN }
-        - { path: '^/dashboard', roles: ROLE_PACIENTE }
-        - { path: '^/cabinet', roles: ROLE_DOCTOR }
+        #- { path: '^/admin', roles: ROLE_ADMIN }
+        #- { path: '^/doctors', roles: ROLE_ADMIN }
+        #- { path: '^/pacientes', roles: ROLE_ADMIN }
+        #- { path: '^/dashboard', roles: ROLE_PACIENTE }
+        #- { path: '^/cabinet', roles: ROLE_DOCTOR }
         # or require ROLE_... for /admin*
         - { path: '^/profile', roles: [IS_AUTHENTICATED_FULLY, ROLE_USER] }
         # the 'ips' option supports IP addresses and subnet masks
