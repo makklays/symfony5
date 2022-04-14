@@ -1,0 +1,47 @@
+{% extends 'layouts/main12.html.twig' %}
+
+{% block title %}Hello Animals!{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-9">
+
+        <h1>La suscripción en nuestras noticias</h1>
+        
+        <div class="row">
+            <div class="col-md-6">
+                
+                {# read and display all message #}
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="flash-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                {{ form_errors(form) }}
+                
+                {{ form_start(form) }}
+
+                    {{ form_row(form.email) }}
+                
+                    <input type="submit" class="btn btn-success" value="Enviar" />
+
+                {{ form_end(form) }}
+            </div>
+            <div class="col-md-6">
+                <img src="/images/email.svg" title="la suscripción" class="" />
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-3">
+        
+        {% include 'main/banner-users.html.twig' %}
+            
+        {% include 'paciente/banner.html.twig' %}
+
+    </div>
+</div>
+{% endblock body %}    

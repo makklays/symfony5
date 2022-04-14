@@ -3,12 +3,28 @@ index:
   controller: App\Controller\MainController::index
 
 info:
-  path: /muy-importante-info
+  path: /{_locale}/muy-importante-info
   controller: App\Controller\MainController::info
+  requirements:
+    _locale: en|es
+
 
 map:
   path: /map
   controller: App\Controller\MainController::map
+
+# Para mail
+app_email:
+  path: /email
+  controller: App\Controller\MainController::email
+app_email2:
+  path: /email2
+  controller: App\Controller\MainController::email_template  
+
+# Subscribe
+app_subscribe:  
+  path: /subscribe
+  controller: App\Controller\MainController::subscribe
 
 # Lucky
 lucky:

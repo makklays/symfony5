@@ -1,0 +1,11 @@
+<h1>Welcome {{ email.toName }}</h1>
+
+<p>
+    You signed up as {{ username }} the following email:
+</p>
+<p><code>{{ email.to[0].address }}</code></p>
+
+<p>
+    <a href="#">Click here to activate your accaunt</a>
+    (this link is valid until {{ expiration_date | date('d-m-Y') }})
+</p>
