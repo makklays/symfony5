@@ -1,6 +1,6 @@
 {% extends 'layouts/main12.html.twig' %}
 
-{% block title %}Hello Animales!{% endblock %}
+{% block title %}MiHospital - Lucky{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -17,18 +17,41 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8" style="margin-top:21px;">
 
             <h1>Lucky</h1>
-            
-            <ul>
+            <p>Siempre hay un espacio para suerte. Preguntame y contestaré.</p>
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <div style="border:1px solid #e7e7e7; padding:15px; height:350px; display:flex; flex-flow:row wrap; align-content:center;">
+                        <div>
+                            <a href="{{ path('app_lucky_number') }}">
+                                <img src="/images/seis.png" class="img-fluid" /><br/>
+                                Número de suerte
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div style="border:1px solid #e7e7e7; padding:15px; height:350px; display:flex; flex-flow:row wrap; align-content:center;">
+                        <div>
+                            <a href="{{ path('app_lucky_frase') }}">
+                                <img src="/images/frase.png" class="img-fluid" /><br/>
+                                Frase de suerte 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--ul>
                 <li>
                     <a href="{{ path('app_lucky_number') }}">Lucky number</a>
                 </li>
                 <li>
                     <a href="{{ path('app_lucky_frase') }}">Lucky frase</a>
                 </li>    
-            </ul>
+            </ul-->
 
         </div>
 

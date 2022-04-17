@@ -12,6 +12,8 @@ info:
 map:
   path: /map
   controller: App\Controller\MainController::map
+  #prefix: /admin2  # require 'composer require symfony/annotacion' 
+  #trailing_slash_on_root: false
 
 # Para mail
 app_email:
